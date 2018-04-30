@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@et6thka^7e!mx%5+gn%5s&ji13kd-07s4(2orq#dzpuhi_qg1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)
@@ -132,7 +132,10 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
