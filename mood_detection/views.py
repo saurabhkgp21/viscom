@@ -25,6 +25,7 @@ def list(request):
 		if form.is_valid():
 			newdoc = Document(docfile = request.FILES['docfile'])
 			newdoc.save()
+			print("sdf",newdoc.docfile.path, newdoc.docfile.url)
 
 			# Redirect to the document list after POST
 			return HttpResponseRedirect(reverse('mood_detection:list_file'))
