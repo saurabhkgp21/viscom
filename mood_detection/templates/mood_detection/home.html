@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Home</title>
+        {% load static %}
 </head>
 <body>
 Deployed
@@ -31,5 +32,10 @@ Upload form. Note enctype attribute!
         </p>
         <p><input type="submit" value="Upload" /></p>
 </form>
+
+{% if image_url %}
+        <p>{{image_url}}</p>
+        <img src="{{ image_url }}" alt="jksfj">
+{% endif %}
 </body>
 </html>

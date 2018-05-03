@@ -27,10 +27,10 @@ from django.template import RequestContext
 
 from .models import Document
 from .forms import DocumentForm
-
+from django.conf import settings
 
 def list(request):
-	print(request.method)
+	print("#####",settings.STATICFILES_DIRS)
 	# Handle file upload
 	if request.method == 'POST':
 		form = DocumentForm(request.POST, request.FILES)
@@ -92,9 +92,8 @@ def list(request):
 				draw_text(face_coordinates, rgb_image, emotion_text, color, 0, -50, 1, 2)
 
 			bgr_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
-			print(os.path.dirname(os.path.abspath(__file__)) + '/predicted_test_image.png')
-			cv2.imwrite(os.path.dirname(os.path.abspath(__file__)) + '/predicted_test_image.png', bgr_image)
-
+			cv2.imwrite(settings.STATICFILES_DIRS[0] + '/predicted_test_image.png', bgr_image)
+			# cv2.imwrite(os.path.dirname(os.path.abspath(__file__)) + '/predicted_test_image.png', bgr_image)
 			keras.backend.clear_session()
 			return HttpResponseRedirect(reverse('mood_detection:list_file'))
 		else:
@@ -105,8 +104,10 @@ def list(request):
 
 	# Load documents for the list page
 	documents = Document.objects.all()
-
+	predictedImagePath = '/static/predicted_test_image.png'
+	print(predictedImagePath)
+	print("Sending command")
 	return render(request,
 		'mood_detection/home.html',
-		{'documents': documents, 'form': form}
+		{'documents': documents, 'form': form, 'image_url': predictedImagePath}
 	)
