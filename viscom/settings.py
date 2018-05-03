@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import dj_database_url
+from mood_detection.utils.inference import load_detection_model
+from keras.models import load_model
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -139,3 +141,9 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+
+
+# gender_model_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/mood_detection/simple_CNN.81-0.96.hdf5'
+# gender_classifier = load_model(gender_model_path, compile=False)
+# detection_model_path =os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/mood_detection/haarcascade_frontalface_default.xml'
+# face_detection = load_detection_model(detection_model_path)
