@@ -42,19 +42,19 @@ def list(request):
 	if request.method == 'POST':
 		form = DocumentForm(request.POST, request.FILES)
 		if form.is_valid():
-			newdoc = Document(docfile = request.FILES['docfile'])
-			# f = tempfile.NamedTemporaryFile(delete=True)
-			# for chunk in request.FILES['docfile'].chunks():
-				# f.write(chunk)
+			# newdoc = Document(docfile = request.FILES['docfile'])
+			f = tempfile.NamedTemporaryFile(delete=True)
+			for chunk in request.FILES['docfile'].chunks():
+				f.write(chunk)
 			# f.write(ContentFile(request.FILES['docfile'].read()))
 			# print(f.name)
-			newdoc.save()
+			# newdoc.save()
 			# print(type(request.FILES['docfile']))
 			# print("#############",newdoc.docfile.path)
 			# gender_model_path = './simple_CNN.81-0.96.hdf5'
 			# imagePath = "/home/saurabh/Saurabh/viscom/viscom/media/documents/05/05/01/download_Aix0x5t.jpeg"
-			imagePath = newdoc.docfile.path
-			# imagePath = f.name
+			# imagePath = newdoc.docfile.path
+			imagePath = f.name
 			detection_model_path =os.path.dirname(os.path.abspath(__file__)) + '/haarcascade_frontalface_default.xml'
 			print("#################",detection_model_path)
 			gender_model_path = os.path.dirname(os.path.abspath(__file__))+'/simple_CNN.81-0.96.hdf5'
